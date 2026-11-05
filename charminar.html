@@ -1,0 +1,712 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Charminar | Virtual Heritage Explorer</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --dark:#21110e;
+    --brown:#48251c;
+    --gold:#d9ad68;
+    --cream:#f8f1e6;
+    --muted:#796b5d;
+}
+
+* {
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html { scroll-behavior:smooth; }
+
+body {
+    background:var(--cream);
+    color:var(--dark);
+    font-family:'DM Sans',sans-serif;
+}
+
+a { text-decoration:none; }
+
+header {
+    background:var(--dark);
+    padding:20px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo {
+    color:white;
+    font-family:'Cinzel',serif;
+    font-size:19px;
+    font-weight:bold;
+}
+
+.logo span {
+    display:block;
+    color:var(--gold);
+    font:9px 'DM Sans',sans-serif;
+    letter-spacing:4px;
+    margin-top:5px;
+}
+
+nav {
+    display:flex;
+    gap:22px;
+    flex-wrap:wrap;
+}
+
+nav a {
+    color:white;
+    font-size:13px;
+}
+
+nav a:hover { color:var(--gold); }
+
+.hero {
+    min-height:580px;
+    display:flex;
+    align-items:center;
+    padding:80px 9%;
+    background:
+      linear-gradient(90deg,#21110eea,#21110e55),
+      url("https://commons.wikimedia.org/wiki/Special:FilePath/Charminar%20Front.jpg");
+    background-position:center;
+    background-size:cover;
+    color:white;
+}
+
+.hero-content { max-width:700px; }
+
+.eyebrow {
+    color:var(--gold);
+    letter-spacing:4px;
+    font-size:12px;
+    font-weight:bold;
+    margin-bottom:20px;
+}
+
+.hero h1 {
+    font-family:'Cinzel',serif;
+    font-size:clamp(45px,7vw,76px);
+    margin-bottom:20px;
+}
+
+.hero p {
+    max-width:580px;
+    line-height:1.9;
+    color:#eee0d0;
+    font-size:15px;
+}
+
+.button {
+    display:inline-block;
+    margin-top:28px;
+    padding:14px 25px;
+    background:var(--gold);
+    color:var(--dark);
+    border-radius:4px;
+    border:none;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.button:hover { background:white; }
+
+section { padding:75px 9%; }
+
+.small-heading {
+    color:#a8793d;
+    letter-spacing:4px;
+    font-size:11px;
+    font-weight:bold;
+    margin-bottom:15px;
+}
+
+h2 {
+    font-family:'Cinzel',serif;
+    color:var(--brown);
+    font-size:clamp(28px,4vw,38px);
+    margin-bottom:22px;
+}
+
+.description {
+    color:var(--muted);
+    font-size:15px;
+    line-height:2;
+}
+
+.facts {
+    background:var(--dark);
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    text-align:center;
+    gap:20px;
+    padding:35px 7%;
+}
+
+.fact h3 {
+    color:var(--gold);
+    font-family:'Cinzel',serif;
+    font-size:23px;
+    margin-bottom:8px;
+}
+
+.fact p {
+    color:#e5d6c5;
+    font-size:12px;
+}
+
+.history {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:45px;
+    align-items:center;
+}
+
+.history img {
+    width:100%;
+    height:390px;
+    object-fit:cover;
+    border-radius:8px;
+    box-shadow:0 10px 30px #0002;
+}
+
+.architecture { background:#efe2cf; }
+
+.architecture-content {
+    max-width:850px;
+    margin:auto;
+    text-align:center;
+}
+
+.architecture-content p {
+    color:var(--muted);
+    line-height:2;
+    font-size:15px;
+}
+
+.gallery-heading {
+    text-align:center;
+    margin-bottom:35px;
+}
+
+.gallery-heading p {
+    color:var(--muted);
+    line-height:1.8;
+}
+
+.gallery {
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
+}
+
+.gallery-item {
+    background:white;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 8px 25px #0002;
+    transition:.4s;
+}
+
+.gallery-item:hover {
+    transform:translateY(-8px);
+}
+
+.gallery-item img {
+    width:100%;
+    height:250px;
+    object-fit:cover;
+    display:block;
+    background:#e4d3bc;
+}
+
+.gallery-item h3 {
+    padding:17px;
+    font-family:'Cinzel',serif;
+    font-size:15px;
+    color:var(--brown);
+}
+
+/* AUDIO GUIDE */
+
+.audio-section {
+    background:var(--dark);
+    text-align:center;
+    color:white;
+}
+
+.audio-section h2 { color:var(--gold); }
+
+.audio-section p {
+    color:#e5d6c5;
+    line-height:1.8;
+    margin-bottom:20px;
+}
+
+.audio-box {
+    max-width:650px;
+    margin:auto;
+    padding:30px;
+    background:#ffffff12;
+    border:1px solid #ffffff25;
+    border-radius:10px;
+}
+
+select {
+    padding:13px;
+    width:100%;
+    max-width:350px;
+    border:1px solid var(--gold);
+    border-radius:5px;
+    margin-bottom:15px;
+    font-size:14px;
+}
+
+.audio-buttons {
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.audio-buttons button {
+    padding:13px 22px;
+    border:none;
+    border-radius:4px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.play { background:var(--gold); }
+.stop { background:white;color:var(--dark); }
+
+.audio-status {
+    margin-top:18px;
+    font-size:13px;
+    color:var(--gold);
+    line-height:1.7;
+}
+
+.ar-section {
+    text-align:center;
+    background:#efe2cf;
+}
+
+.ar-box {
+    max-width:750px;
+    margin:auto;
+    background:white;
+    padding:40px 25px;
+    border-radius:10px;
+    box-shadow:0 8px 30px #0001;
+}
+
+.ar-icon { font-size:55px;margin-bottom:15px; }
+
+.ar-box p {
+    color:var(--muted);
+    line-height:1.8;
+    margin-bottom:15px;
+}
+
+.ar-status {
+    font-size:12px;
+    color:#956b35;
+    margin-top:12px;
+}
+
+footer {
+    background:#1b0d0a;
+    color:white;
+    text-align:center;
+    padding:35px 15px;
+}
+
+footer h3 {
+    font-family:'Cinzel',serif;
+    color:var(--gold);
+    margin-bottom:10px;
+}
+
+footer p {
+    font-size:12px;
+    color:#c7b5a3;
+    line-height:2;
+}
+
+footer a { color:var(--gold); }
+
+@media(max-width:900px) {
+    .gallery { grid-template-columns:repeat(2,1fr); }
+}
+
+@media(max-width:750px) {
+    header {
+        flex-direction:column;
+        gap:15px;
+    }
+
+    nav {
+        justify-content:center;
+        gap:13px;
+    }
+
+    .history { grid-template-columns:1fr; }
+
+    .facts { grid-template-columns:repeat(2,1fr); }
+}
+
+@media(max-width:500px) {
+    .gallery { grid-template-columns:1fr; }
+    .gallery-item img { height:260px; }
+    section { padding:55px 6%; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <a href="index.html" class="logo">
+        VIRTUAL HERITAGE
+        <span>EXPLORER · INDIA</span>
+    </a>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="#history">History</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#audio">Audio Guide</a>
+        <a href="#ar">AR Experience</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <div class="hero-content">
+        <div class="eyebrow">HYDERABAD · TELANGANA · INDIA</div>
+
+        <h1>Charminar</h1>
+
+        <p>
+            Discover the iconic landmark of Hyderabad.
+            With its four magnificent minarets, beautiful arches
+            and Indo-Islamic architecture, Charminar represents
+            the rich history and cultural identity of the city.
+        </p>
+
+        <a href="#history" class="button">DISCOVER ITS HISTORY →</a>
+    </div>
+</section>
+
+<div class="facts">
+    <div class="fact"><h3>1591</h3><p>Built in 1591</p></div>
+    <div class="fact"><h3>4</h3><p>Grand Minarets</p></div>
+    <div class="fact"><h3>Qutb Shahi</h3><p>Dynasty</p></div>
+    <div class="fact"><h3>Hyderabad</h3><p>Telangana, India</p></div>
+</div>
+
+<section class="history" id="history">
+    <div>
+        <div class="small-heading">THE STORY BEHIND THE MONUMENT</div>
+        <h2>The Icon of Hyderabad</h2>
+
+        <p class="description">
+            Charminar is one of the most recognised historical
+            monuments in India. It is located in the heart of
+            Hyderabad, Telangana.
+
+            The monument was constructed in 1591 by Muhammad
+            Quli Qutb Shah, the fifth ruler of the Qutb Shahi
+            dynasty. It is widely associated with the founding
+            and development of Hyderabad.
+
+            The name Charminar comes from two words:
+            "Char" meaning four and "Minar" meaning towers.
+
+            The monument stands as an important symbol of
+            Hyderabad's history, culture and architectural heritage.
+        </p>
+    </div>
+
+    <img
+        src="https://commons.wikimedia.org/wiki/Special:FilePath/Char%20Minar%20at%20noon%2C%20Hyderabad.jpg"
+        alt="Charminar monument"
+        loading="lazy">
+</section>
+
+<section class="architecture">
+    <div class="architecture-content">
+        <div class="small-heading">DESIGN & ARCHITECTURE</div>
+        <h2>Four Towers, One Timeless Legacy</h2>
+
+        <p>
+            Charminar is known for its four grand minarets,
+            each rising from the four corners of the structure.
+            Its architectural design combines Indo-Islamic
+            elements with Persian influences.
+
+            The monument features large arches, decorative
+            stucco work, balconies and a mosque on its upper floor.
+            Its symmetrical layout makes it an important example
+            of the architectural achievements of the Qutb Shahi era.
+
+            The monument continues to attract visitors,
+            photographers and history enthusiasts from across
+            the world.
+        </p>
+    </div>
+</section>
+
+<section id="gallery">
+    <div class="gallery-heading">
+        <div class="small-heading">VISUAL JOURNEY</div>
+        <h2>Charminar Gallery</h2>
+        <p>Explore different views of the iconic Charminar monument.</p>
+    </div>
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Charminar%20Front.jpg" alt="Charminar front view" loading="lazy">
+            <h3>Charminar Front View</h3>
+        </div>
+
+        <div class="gallery-item">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/A%20view%20of%20Charminar%20during%20sunrise.jpg" alt="Charminar sunrise" loading="lazy">
+            <h3>Charminar at Sunrise</h3>
+        </div>
+
+        <div class="gallery-item">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/A%20Rainy%20Morning%2C%20Charminar.jpg" alt="Charminar rainy morning" loading="lazy">
+            <h3>Rainy Morning View</h3>
+        </div>
+
+        <div class="gallery-item">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Charminar%20Evening%20View%20Hyderabad.jpg" alt="Charminar evening" loading="lazy">
+            <h3>Charminar in the Evening</h3>
+        </div>
+
+        <div class="gallery-item">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/A%20worm%27s%20eye%20view%20of%20the%20Charminar.jpg" alt="Charminar minarets" loading="lazy">
+            <h3>Four Grand Minarets</h3>
+        </div>
+
+        <div class="gallery-item">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Charminar%20at%20Dusk.jpg" alt="Charminar at dusk" loading="lazy">
+            <h3>Charminar at Dusk</h3>
+        </div>
+    </div>
+
+    <p style="text-align:center;margin-top:25px;font-size:12px;color:#796b5d;">
+        Photographs sourced from
+        <a href="https://commons.wikimedia.org/wiki/Category:Charminar" target="_blank" style="color:#956b35;">
+            Wikimedia Commons
+        </a>.
+    </p>
+</section>
+
+<!-- FIVE-LANGUAGE AUDIO GUIDE -->
+
+<section class="audio-section" id="audio">
+    <div class="small-heading">LISTEN & LEARN</div>
+    <h2>Multilingual Audio Guide</h2>
+
+    <p>Listen to the history of Charminar in your preferred language.</p>
+
+    <div class="audio-box">
+
+        <select id="language">
+            <option value="en-IN">English</option>
+            <option value="hi-IN">Hindi</option>
+            <option value="kn-IN">Kannada</option>
+            <option value="te-IN">Telugu</option>
+            <option value="ta-IN">Tamil</option>
+        </select>
+
+        <div class="audio-buttons">
+            <button class="play" onclick="playGuide()">▶ Play Audio Guide</button>
+            <button class="stop" onclick="stopGuide()">■ Stop</button>
+        </div>
+
+        <p class="audio-status" id="audioStatus" aria-live="polite">
+            Select a language and press Play.
+        </p>
+    </div>
+</section>
+
+<section class="ar-section" id="ar">
+    <div class="small-heading">IMMERSIVE TECHNOLOGY</div>
+    <h2>Explore Charminar in Augmented Reality</h2>
+
+    <div class="ar-box">
+        <div class="ar-icon">🏛️</div>
+
+        <h3 style="font-family:'Cinzel',serif;color:#48251c;margin-bottom:15px;">
+            AR Heritage Scanner
+        </h3>
+
+        <p>
+            Experience Charminar through augmented reality.
+            Scan the designated heritage image to explore
+            its digital 3D monument model.
+        </p>
+
+        <button class="button" onclick="showARMessage()">OPEN AR SCANNER</button>
+
+        <div class="ar-status" id="arStatus">
+            AR application connection is not configured yet.
+        </div>
+    </div>
+</section>
+
+<footer>
+    <h3>VIRTUAL HERITAGE EXPLORER</h3>
+    <p>Discover the past. Experience the present. Preserve the future.</p>
+    <p style="margin-top:15px;"><a href="index.html">← Back to Home</a></p>
+    <p style="margin-top:15px;">© 2026 Virtual Heritage Explorer</p>
+</footer>
+
+<script>
+
+// ALL FIVE CHARMINAR NARRATIONS ARE INCLUDED IN THIS FILE.
+
+const guides = {
+
+    "en-IN": `Welcome to Charminar, the iconic monument of Hyderabad, Telangana. Charminar was constructed in 1591 by Muhammad Quli Qutb Shah, the fifth ruler of the Qutb Shahi dynasty. Its name comes from two words, Char meaning four and Minar meaning towers. The monument is famous for its four grand minarets, beautiful arches and Indo Islamic architecture. It is an important symbol of Hyderabad's history, culture and heritage. Visitors from across the world come to admire its architecture and historical importance.`,
+
+    "hi-IN": `हैदराबाद और तेलंगाना के प्रसिद्ध ऐतिहासिक स्मारक चारमीनार में आपका स्वागत है। चारमीनार का निर्माण 1591 में कुतुब शाही वंश के पांचवें शासक मुहम्मद कुली कुतुब शाह ने करवाया था। चारमीनार नाम का अर्थ है चार मीनारें। यह स्मारक अपनी चार भव्य मीनारों, सुंदर मेहराबों और इंडो इस्लामिक वास्तुकला के लिए प्रसिद्ध है। चारमीनार हैदराबाद के इतिहास, संस्कृति और विरासत का महत्वपूर्ण प्रतीक है। दुनिया भर से पर्यटक इसकी सुंदर वास्तुकला को देखने आते हैं।`,
+
+    "kn-IN": `ಹೈದರಾಬಾದ್ ಮತ್ತು ತೆಲಂಗಾಣದ ಪ್ರಸಿದ್ಧ ಐತಿಹಾಸಿಕ ಸ್ಮಾರಕವಾದ ಚಾರ್ಮಿನಾರ್‌ಗೆ ಸ್ವಾಗತ. ಚಾರ್ಮಿನಾರ್ ಅನ್ನು 1591ರಲ್ಲಿ ಕುತುಬ್ ಶಾಹಿ ವಂಶದ ಐದನೇ ಆಡಳಿತಗಾರ ಮುಹಮ್ಮದ್ ಕುಲಿ ಕುತುಬ್ ಷಾ ನಿರ್ಮಿಸಿದರು. ಚಾರ್ ಎಂದರೆ ನಾಲ್ಕು ಮತ್ತು ಮಿನಾರ್ ಎಂದರೆ ಗೋಪುರಗಳು. ಈ ಸ್ಮಾರಕವು ತನ್ನ ನಾಲ್ಕು ಭವ್ಯವಾದ ಮಿನಾರ್‌ಗಳು, ಸುಂದರವಾದ ಕಮಾನುಗಳು ಮತ್ತು ಇಂಡೋ ಇಸ್ಲಾಮಿಕ್ ವಾಸ್ತುಶಿಲ್ಪಕ್ಕೆ ಪ್ರಸಿದ್ಧವಾಗಿದೆ. ಚಾರ್ಮಿನಾರ್ ಹೈದರಾಬಾದ್‌ನ ಇತಿಹಾಸ, ಸಂಸ್ಕೃತಿ ಮತ್ತು ಪರಂಪರೆಯ ಪ್ರಮುಖ ಸಂಕೇತವಾಗಿದೆ. ಪ್ರಪಂಚದಾದ್ಯಂತದ ಪ್ರವಾಸಿಗರು ಇದರ ಸೌಂದರ್ಯವನ್ನು ನೋಡಲು ಭೇಟಿ ನೀಡುತ್ತಾರೆ.`,
+
+    "te-IN": `హైదరాబాద్ మరియు తెలంగాణలోని ప్రసిద్ధ చారిత్రక కట్టడం చార్మినార్‌కు స్వాగతం. చార్మినార్‌ను 1591వ సంవత్సరంలో కుతుబ్ షాహీ వంశానికి చెందిన ఐదవ పాలకుడు మహమ్మద్ కులీ కుతుబ్ షా నిర్మించారు. చార్ అంటే నాలుగు, మినార్ అంటే గోపురాలు. ఈ కట్టడం నాలుగు అద్భుతమైన మినార్లు, అందమైన తోరణాలు మరియు ఇండో ఇస్లామిక్ నిర్మాణ శైలికి ప్రసిద్ధి చెందింది. చార్మినార్ హైదరాబాద్ చరిత్ర, సంస్కృతి మరియు వారసత్వానికి ముఖ్యమైన చిహ్నంగా నిలుస్తుంది. ప్రపంచం నలుమూలల నుండి పర్యాటకులు దీనిని సందర్శిస్తారు.`,
+
+    "ta-IN": `ஹைதராபாத் மற்றும் தெலங்கானாவின் புகழ்பெற்ற வரலாற்றுச் சின்னமான சார்மினாருக்கு உங்களை வரவேற்கிறோம். சார்மினார் 1591 ஆம் ஆண்டு குதுப் ஷாஹி வம்சத்தின் ஐந்தாவது ஆட்சியாளரான முகமது குலி குதுப் ஷாவால் கட்டப்பட்டது. சார் என்றால் நான்கு, மினார் என்றால் கோபுரங்கள். இந்த நினைவுச் சின்னம் அதன் நான்கு பிரம்மாண்டமான கோபுரங்கள், அழகான வளைவுகள் மற்றும் இந்தோ இஸ்லாமிய கட்டிடக்கலைக்காகப் புகழ்பெற்றது. சார்மினார் ஹைதராபாத்தின் வரலாறு, கலாச்சாரம் மற்றும் பாரம்பரியத்தின் முக்கிய அடையாளமாக விளங்குகிறது. உலகம் முழுவதிலுமிருந்து சுற்றுலாப் பயணிகள் இதைப் பார்வையிடுகின்றனர்.`
+
+};
+
+let currentUtterance = null;
+let requestNumber = 0;
+
+function playGuide() {
+
+    if (!("speechSynthesis" in window)) {
+        document.getElementById("audioStatus").textContent =
+            "Your browser does not support speech playback. Please use updated Chrome.";
+        return;
+    }
+
+    const language = document.getElementById("language").value;
+    const narration = guides[language];
+
+    if (!narration) {
+        document.getElementById("audioStatus").textContent =
+            "Narration is unavailable.";
+        return;
+    }
+
+    const thisRequest = ++requestNumber;
+
+    speechSynthesis.cancel();
+
+    document.getElementById("audioStatus").textContent =
+        "Loading " + language + " voice...";
+
+    const startSpeaking = () => {
+
+        if (thisRequest !== requestNumber) return;
+
+        const voices = speechSynthesis.getVoices();
+
+        const languageCode = language.split("-")[0].toLowerCase();
+
+        const matchingVoices = voices.filter(voice =>
+            voice.lang.toLowerCase().startsWith(languageCode)
+        );
+
+        if (matchingVoices.length === 0) {
+            document.getElementById("audioStatus").textContent =
+                "The " + languageCode.toUpperCase() +
+                " voice is not installed on this device. Install its speech voice in your device settings and restart Chrome.";
+            return;
+        }
+
+        const selectedVoice =
+            matchingVoices.find(voice =>
+                voice.lang.toLowerCase() === language.toLowerCase()
+            ) || matchingVoices[0];
+
+        currentUtterance = new SpeechSynthesisUtterance(narration);
+
+        currentUtterance.voice = selectedVoice;
+        currentUtterance.lang = selectedVoice.lang;
+        currentUtterance.rate = 0.88;
+        currentUtterance.pitch = 1;
+        currentUtterance.volume = 1;
+
+        currentUtterance.onstart = () => {
+            document.getElementById("audioStatus").textContent =
+                "Playing " + languageCode.toUpperCase() + " narration...";
+        };
+
+        currentUtterance.onend = () => {
+            document.getElementById("audioStatus").textContent =
+                "Audio guide completed.";
+        };
+
+        currentUtterance.onerror = (event) => {
+            if (event.error !== "canceled" &&
+                event.error !== "interrupted") {
+                document.getElementById("audioStatus").textContent =
+                    "Audio playback error: " + event.error;
+            }
+        };
+
+        speechSynthesis.speak(currentUtterance);
+    };
+
+    let voices = speechSynthesis.getVoices();
+
+    if (voices.length > 0) {
+        startSpeaking();
+    } else {
+        speechSynthesis.onvoiceschanged = startSpeaking;
+
+        setTimeout(() => {
+            if (thisRequest === requestNumber &&
+                !speechSynthesis.speaking) {
+                startSpeaking();
+            }
+        }, 1500);
+    }
+}
+
+function stopGuide() {
+    requestNumber++;
+    speechSynthesis.cancel();
+
+    document.getElementById("audioStatus").textContent =
+        "Audio guide stopped.";
+}
+
+function showARMessage() {
+    document.getElementById("arStatus").textContent =
+        "Connect your Unity Android application to enable the AR scanner.";
+}
+
+window.addEventListener("beforeunload", () => {
+    if ("speechSynthesis" in window) {
+        speechSynthesis.cancel();
+    }
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,772 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hampi | Virtual Heritage Explorer</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --dark: #21150f;
+    --brown: #3b2519;
+    --gold: #c99b50;
+    --cream: #f7f0e5;
+    --light: #fffaf2;
+    --text: #514238;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+}
+
+nav {
+    height: 76px;
+    background: rgba(33,21,15,0.97);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 7%;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    color: var(--gold);
+    font-family: 'Cinzel', serif;
+    font-size: 19px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links a {
+    color: #f8eee0;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.nav-links a:hover { color: var(--gold); }
+
+.hero {
+    min-height: 590px;
+    background:
+      linear-gradient(rgba(20,12,8,.48), rgba(20,12,8,.78)),
+      url("https://commons.wikimedia.org/wiki/Special:FilePath/The%20Virupaksha%20Temple%2C%20Hampi.jpg")
+      center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    padding: 80px 10%;
+    color: white;
+}
+
+.hero-content { max-width: 720px; }
+
+.eyebrow {
+    color: var(--gold);
+    letter-spacing: 4px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.hero h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(42px, 7vw, 76px);
+    margin: 18px 0;
+    line-height: 1.15;
+}
+
+.hero p {
+    font-size: 17px;
+    line-height: 1.8;
+    max-width: 620px;
+    color: #f4e9da;
+}
+
+.hero-btn {
+    display: inline-block;
+    margin-top: 28px;
+    background: var(--gold);
+    color: var(--dark);
+    padding: 14px 28px;
+    border-radius: 3px;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+section { padding: 80px 9%; }
+
+.section-title {
+    font-family: 'Cinzel', serif;
+    color: var(--brown);
+    font-size: clamp(27px, 4vw, 38px);
+    margin-bottom: 18px;
+}
+
+.section-subtitle {
+    color: #8b735e;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.intro {
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    gap: 55px;
+    align-items: center;
+}
+
+.intro p, .content-text {
+    line-height: 1.9;
+    font-size: 15px;
+    margin-top: 15px;
+}
+
+.intro img {
+    width: 100%;
+    height: 390px;
+    object-fit: cover;
+    border-radius: 5px;
+    box-shadow: 0 15px 35px #39271930;
+}
+
+.facts {
+    background: var(--brown);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 45px 9%;
+    text-align: center;
+}
+
+.fact h2 {
+    color: var(--gold);
+    font-family: 'Cinzel', serif;
+    font-size: 30px;
+}
+
+.fact p {
+    color: #f3e6d6;
+    font-size: 13px;
+    margin-top: 8px;
+}
+
+.history {
+    background: var(--light);
+}
+
+.history-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 45px;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.history-grid img {
+    width: 100%;
+    height: 370px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.architecture {
+    background: var(--cream);
+}
+
+.architecture-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    margin-top: 35px;
+}
+
+.arch-card {
+    background: white;
+    padding: 28px;
+    border-bottom: 3px solid var(--gold);
+    box-shadow: 0 8px 25px #39271910;
+}
+
+.arch-card h3 {
+    color: var(--brown);
+    font-family: 'Cinzel', serif;
+    font-size: 18px;
+    margin-bottom: 12px;
+}
+
+.arch-card p {
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.gallery {
+    background: var(--light);
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 35px;
+}
+
+.gallery-item {
+    overflow: hidden;
+    border-radius: 5px;
+    background: #eee0ce;
+}
+
+.gallery-item img {
+    display: block;
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: transform .4s;
+}
+
+.gallery-item:hover img { transform: scale(1.06); }
+
+.gallery-item p {
+    padding: 13px;
+    font-weight: 600;
+    color: var(--brown);
+    font-size: 14px;
+}
+
+.audio {
+    background: var(--brown);
+    color: white;
+    text-align: center;
+}
+
+.audio .section-title { color: white; }
+
+.audio p {
+    color: #e8d9c7;
+    line-height: 1.8;
+    max-width: 650px;
+    margin: 0 auto 25px;
+}
+
+.audio-controls {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+select, button {
+    padding: 13px 18px;
+    border: none;
+    border-radius: 3px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+}
+
+select {
+    background: white;
+    color: var(--brown);
+}
+
+button {
+    cursor: pointer;
+    background: var(--gold);
+    color: var(--dark);
+    font-weight: 700;
+}
+
+button:hover { background: #e0b76e; }
+
+#speechStatus {
+    margin-top: 18px;
+    font-size: 13px;
+    color: var(--gold);
+}
+
+.ar-section {
+    text-align: center;
+    background: #eee2d1;
+}
+
+.ar-box {
+    max-width: 750px;
+    margin: 30px auto 0;
+    padding: 45px 25px;
+    background: white;
+    border: 1px solid #ddc9aa;
+    border-radius: 5px;
+}
+
+.ar-box h3 {
+    font-family: 'Cinzel', serif;
+    color: var(--brown);
+    font-size: 23px;
+    margin-bottom: 15px;
+}
+
+.ar-box p {
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+footer {
+    background: var(--dark);
+    color: #d8c5ad;
+    padding: 35px 8%;
+    text-align: center;
+    font-size: 13px;
+    line-height: 2;
+}
+
+footer span { color: var(--gold); }
+
+@media(max-width: 800px) {
+    .nav-links { gap: 12px; }
+    .nav-links a { font-size: 11px; }
+    .intro, .history-grid { grid-template-columns: 1fr; }
+    .facts { grid-template-columns: repeat(2, 1fr); }
+    .architecture-cards { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media(max-width: 520px) {
+    nav { padding: 0 4%; }
+    .logo { font-size: 14px; }
+    .nav-links { gap: 8px; }
+    .nav-links a { font-size: 10px; }
+    section { padding: 55px 6%; }
+    .gallery-grid { grid-template-columns: 1fr; }
+    .hero { min-height: 500px; padding: 60px 7%; }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <a class="logo" href="index.html">VIRTUAL HERITAGE</a>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="#history">History</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#audio">Audio Guide</a>
+    </div>
+</nav>
+
+<header class="hero">
+    <div class="hero-content">
+        <div class="eyebrow">UNESCO World Heritage Site · Karnataka, India</div>
+        <h1>Hampi</h1>
+        <p>
+            Discover the magnificent ruins of the Vijayanagara Empire,
+            where grand temples, stone chariots and ancient monuments
+            preserve the glory of one of India's greatest kingdoms.
+        </p>
+        <a href="#history" class="hero-btn">Explore Heritage</a>
+    </div>
+</header>
+
+<section class="intro">
+    <div>
+        <div class="section-subtitle">The Lost City</div>
+        <h2 class="section-title">Welcome to Hampi</h2>
+        <p>
+            Hampi is a historic village located on the banks of the
+            Tungabhadra River in Karnataka. It was once the capital of
+            the powerful Vijayanagara Empire and became one of the
+            most prosperous cities in medieval India.
+        </p>
+        <p>
+            Today, Hampi is famous for its spectacular stone temples,
+            royal structures, massive boulders, ancient markets and
+            remarkable architectural remains. Its monuments tell the
+            story of a rich cultural and artistic past.
+        </p>
+    </div>
+    <img
+      src="https://commons.wikimedia.org/wiki/Special:FilePath/Virupaksha%20temple%20hampi.jpg"
+      alt="Virupaksha Temple at Hampi">
+</section>
+
+<div class="facts">
+    <div class="fact">
+        <h2>14th</h2>
+        <p>Century rise of the empire</p>
+    </div>
+    <div class="fact">
+        <h2>1986</h2>
+        <p>UNESCO World Heritage inscription</p>
+    </div>
+    <div class="fact">
+        <h2>160+</h2>
+        <p>Square kilometres of heritage landscape</p>
+    </div>
+    <div class="fact">
+        <h2>Karnataka</h2>
+        <p>Location in southern India</p>
+    </div>
+</div>
+
+<section class="history" id="history">
+    <div class="section-subtitle">A Glorious Past</div>
+    <h2 class="section-title">History of Hampi</h2>
+
+    <div class="history-grid">
+        <div>
+            <p class="content-text">
+                Hampi flourished as the capital of the Vijayanagara
+                Empire, which was founded in 1336 by Harihara I and
+                Bukka Raya I. Under rulers such as Krishnadevaraya,
+                the city developed into an important centre of trade,
+                religion, art and culture.
+            </p>
+            <p class="content-text">
+                Traders from different parts of the world visited
+                Vijayanagara, bringing wealth and cultural exchange.
+                The city was known for its grand temples, busy markets,
+                royal buildings and advanced water-management systems.
+            </p>
+            <p class="content-text">
+                Following the Battle of Talikota in 1565, the city
+                suffered extensive destruction and gradually declined.
+                Its surviving monuments now provide valuable evidence
+                of the empire's achievements.
+            </p>
+        </div>
+
+        <img
+          src="https://commons.wikimedia.org/wiki/Special:FilePath/The%20lotus%20mahal%2C%20hampi.jpg"
+          alt="Lotus Mahal at Hampi">
+    </div>
+</section>
+
+<section class="architecture" id="architecture">
+    <div class="section-subtitle">Art and Engineering</div>
+    <h2 class="section-title">Architectural Highlights</h2>
+    <p class="content-text">
+        Hampi showcases a remarkable combination of Dravidian
+        temple architecture, detailed stone carvings and impressive
+        royal structures.
+    </p>
+
+    <div class="architecture-cards">
+        <div class="arch-card">
+            <h3>Stone Chariot</h3>
+            <p>
+                Located in the Vittala Temple complex, the iconic
+                stone chariot is one of Hampi's most recognised
+                architectural masterpieces.
+            </p>
+        </div>
+
+        <div class="arch-card">
+            <h3>Virupaksha Temple</h3>
+            <p>
+                A historic temple dedicated to Lord Shiva, known
+                for its towering entrance gopuram, beautiful
+                carvings and active religious traditions.
+            </p>
+        </div>
+
+        <div class="arch-card">
+            <h3>Lotus Mahal</h3>
+            <p>
+                A beautiful two-storeyed royal structure recognised
+                for its lotus-inspired arches and elegant blend
+                of architectural styles.
+            </p>
+        </div>
+
+        <div class="arch-card">
+            <h3>Vittala Temple</h3>
+            <p>
+                Famous for its elaborate pillars, grand halls
+                and the celebrated stone chariot in its courtyard.
+            </p>
+        </div>
+
+        <div class="arch-card">
+            <h3>Royal Enclosure</h3>
+            <p>
+                An important area containing remains of royal
+                platforms, audience halls and ancient water systems.
+            </p>
+        </div>
+
+        <div class="arch-card">
+            <h3>Ancient Market Streets</h3>
+            <p>
+                Long rows of stone-pillared pavilions reveal how
+                trade and public life once flourished in Hampi.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="gallery" id="gallery">
+    <div class="section-subtitle">Visual Journey</div>
+    <h2 class="section-title">Explore Hampi Gallery</h2>
+    <p class="content-text">
+        Discover some of the remarkable monuments and historic
+        structures that make Hampi a unique heritage destination.
+    </p>
+
+    <div class="gallery-grid">
+
+        <div class="gallery-item">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Hampi%20chariot.jpg"
+              alt="Stone chariot at Vittala Temple">
+            <p>Stone Chariot</p>
+        </div>
+
+        <div class="gallery-item">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Virupaksha%20temple%20hampi.jpg"
+              alt="Virupaksha Temple">
+            <p>Virupaksha Temple</p>
+        </div>
+
+        <div class="gallery-item">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/The%20lotus%20mahal%2C%20hampi.jpg"
+              alt="Lotus Mahal">
+            <p>Lotus Mahal</p>
+        </div>
+
+        <div class="gallery-item">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Stone%20Chariot%20Vittala%20Temple.jpg"
+              alt="Vittala Temple stone chariot">
+            <p>Vittala Temple Complex</p>
+        </div>
+
+        <div class="gallery-item">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Hampi%2C%20India%2C%20Temple%20on%20top%20of%20Matanga%20Hill.jpg"
+              alt="Temple on Matanga Hill">
+            <p>Matanga Hill</p>
+        </div>
+
+        <div class="gallery-item">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Virupaksha%20Temple%20Complex%2C%20Hampi.jpg"
+              alt="Virupaksha Temple complex">
+            <p>Temple Complex</p>
+        </div>
+
+    </div>
+</section>
+
+<section class="audio" id="audio">
+    <div class="section-subtitle">Listen and Discover</div>
+    <h2 class="section-title">Multilingual Audio Guide</h2>
+    <p>
+        Explore the history of Hampi through an audio narration.
+        Select your preferred language and listen to the heritage story.
+    </p>
+
+    <div class="audio-controls">
+        <select id="language">
+            <option value="en-IN">English</option>
+            <option value="hi-IN">Hindi</option>
+            <option value="kn-IN">Kannada</option>
+            <option value="te-IN">Telugu</option>
+            <option value="ta-IN">Tamil</option>
+        </select>
+
+        <button onclick="playAudio()">▶ Play Audio</button>
+        <button onclick="stopAudio()">■ Stop</button>
+    </div>
+
+    <div id="speechStatus">Select a language to begin.</div>
+</section>
+
+<section class="ar-section">
+    <div class="section-subtitle">Immersive Experience</div>
+    <h2 class="section-title">Explore Hampi in Augmented Reality</h2>
+
+    <div class="ar-box">
+        <h3>Bring Heritage to Life</h3>
+        <p>
+            Experience historical monuments through an interactive
+            Augmented Reality experience. Scan a supported heritage
+            image to explore a digital 3D monument.
+        </p>
+        <button onclick="showARMessage()">Explore in AR</button>
+        <p id="arMessage" style="margin-top:18px; color:#8b6540;"></p>
+    </div>
+</section>
+
+<footer>
+    <p><span>Virtual Heritage Explorer</span></p>
+    <p>Preserving the past through digital innovation.</p>
+    <p>© 2026 Virtual Heritage Explorer | Hampi, Karnataka</p>
+</footer>
+
+<script>
+
+// FIVE-LANGUAGE HAMPI AUDIO GUIDE
+// Same voice-selection logic as Charminar
+
+const narrations = {
+    "en-IN": `Welcome to Hampi, the historic capital of the Vijayanagara Empire. Hampi flourished as a centre of trade, culture, religion and architecture. It is famous for the Virupaksha Temple, Vittala Temple and its magnificent stone chariot. The ruins of Hampi preserve the legacy of a powerful kingdom and its remarkable artistic achievements. Today, Hampi is recognised as a UNESCO World Heritage Site.`,
+
+    "hi-IN": `हम्पी में आपका स्वागत है। हम्पी विजयनगर साम्राज्य की ऐतिहासिक राजधानी थी। यह व्यापार, संस्कृति, धर्म और वास्तुकला का एक महत्वपूर्ण केंद्र था। हम्पी अपने विरुपाक्ष मंदिर, विट्ठल मंदिर और प्रसिद्ध पत्थर के रथ के लिए जाना जाता है। आज हम्पी यूनेस्को विश्व धरोहर स्थल है।`,
+
+    "kn-IN": `ಹಂಪಿಗೆ ಸ್ವಾಗತ. ಹಂಪಿ ವಿಜಯನಗರ ಸಾಮ್ರಾಜ್ಯದ ಐತಿಹಾಸಿಕ ರಾಜಧಾನಿಯಾಗಿತ್ತು. ಇದು ವ್ಯಾಪಾರ, ಸಂಸ್ಕೃತಿ, ಧರ್ಮ ಮತ್ತು ವಾಸ್ತುಶಿಲ್ಪದ ಪ್ರಮುಖ ಕೇಂದ್ರವಾಗಿತ್ತು. ವಿರೂಪಾಕ್ಷ ದೇವಸ್ಥಾನ, ವಿಠ್ಠಲ ದೇವಸ್ಥಾನ ಮತ್ತು ಪ್ರಸಿದ್ಧ ಕಲ್ಲಿನ ರಥ ಹಂಪಿಯ ಪ್ರಮುಖ ಆಕರ್ಷಣೆಗಳಾಗಿವೆ. ಇಂದು ಹಂಪಿ ಯುನೆಸ್ಕೋ ವಿಶ್ವ ಪರಂಪರೆಯ ತಾಣವಾಗಿದೆ.`,
+
+    "te-IN": `హంపికి స్వాగతం. హంపి విజయనగర సామ్రాజ్యానికి చారిత్రక రాజధానిగా ఉండేది. ఇది వాణిజ్యం, సంస్కృతి, మతం మరియు వాస్తుశిల్పానికి ముఖ్యమైన కేంద్రంగా నిలిచింది. విరూపాక్ష దేవాలయం, విఠల దేవాలయం మరియు ప్రసిద్ధ రాతి రథం హంపి యొక్క ప్రధాన ఆకర్షణలు. నేడు హంపి యునెస్కో ప్రపంచ వారసత్వ ప్రదేశంగా గుర్తింపు పొందింది.`,
+
+    "ta-IN": `ஹம்பிக்கு வரவேற்கிறோம். ஹம்பி விஜயநகரப் பேரரசின் வரலாற்றுச் சிறப்புமிக்க தலைநகரமாக இருந்தது. இது வணிகம், கலாச்சாரம், மதம் மற்றும் கட்டிடக்கலையின் முக்கிய மையமாக விளங்கியது. விருபாக்ஷா கோவில், விட்டலா கோவில் மற்றும் புகழ்பெற்ற கல் தேர் ஆகியவை ஹம்பியின் முக்கிய சிறப்புகளாகும். இன்று ஹம்பி யுனெஸ்கோ உலக பாரம்பரிய தளமாக அங்கீகரிக்கப்பட்டுள்ளது.`
+};
+
+let currentUtterance = null;
+let requestNumber = 0;
+
+function playAudio() {
+
+    if (!("speechSynthesis" in window)) {
+        document.getElementById("speechStatus").textContent =
+            "Your browser does not support speech playback. Please use updated Chrome.";
+        return;
+    }
+
+    const language = document.getElementById("language").value;
+    const narration = narrations[language];
+
+    if (!narration) {
+        document.getElementById("speechStatus").textContent =
+            "Narration is unavailable.";
+        return;
+    }
+
+    const thisRequest = ++requestNumber;
+
+    speechSynthesis.cancel();
+
+    document.getElementById("speechStatus").textContent =
+        "Loading " + language + " voice...";
+
+    const startSpeaking = () => {
+
+        if (thisRequest !== requestNumber) return;
+
+        const voices = speechSynthesis.getVoices();
+
+        const languageCode = language.split("-")[0].toLowerCase();
+
+        const matchingVoices = voices.filter(voice =>
+            voice.lang.toLowerCase().startsWith(languageCode)
+        );
+
+        if (matchingVoices.length === 0) {
+            document.getElementById("speechStatus").textContent =
+                "The " + languageCode.toUpperCase() +
+                " voice is not installed on this device. Install its speech voice in your device settings and restart Chrome.";
+            return;
+        }
+
+        const selectedVoice =
+            matchingVoices.find(voice =>
+                voice.lang.toLowerCase() === language.toLowerCase()
+            ) || matchingVoices[0];
+
+        currentUtterance = new SpeechSynthesisUtterance(narration);
+
+        currentUtterance.voice = selectedVoice;
+        currentUtterance.lang = selectedVoice.lang;
+        currentUtterance.rate = 0.88;
+        currentUtterance.pitch = 1;
+        currentUtterance.volume = 1;
+
+        currentUtterance.onstart = () => {
+            if (thisRequest !== requestNumber) return;
+            document.getElementById("speechStatus").textContent =
+                "Playing " + languageCode.toUpperCase() + " narration...";
+        };
+
+        currentUtterance.onend = () => {
+            if (thisRequest !== requestNumber) return;
+            document.getElementById("speechStatus").textContent =
+                "Audio guide completed.";
+        };
+
+        currentUtterance.onerror = (event) => {
+            if (thisRequest !== requestNumber) return;
+            if (event.error !== "canceled" &&
+                event.error !== "interrupted") {
+                document.getElementById("speechStatus").textContent =
+                    "Audio playback error: " + event.error;
+            }
+        };
+
+        speechSynthesis.speak(currentUtterance);
+    };
+
+    const voices = speechSynthesis.getVoices();
+
+    if (voices.length > 0) {
+        startSpeaking();
+    } else {
+        speechSynthesis.onvoiceschanged = startSpeaking;
+
+        setTimeout(() => {
+            if (thisRequest === requestNumber &&
+                !speechSynthesis.speaking) {
+                startSpeaking();
+            }
+        }, 1500);
+    }
+}
+
+function stopAudio() {
+    requestNumber++;
+
+    if ("speechSynthesis" in window) {
+        speechSynthesis.cancel();
+    }
+
+    currentUtterance = null;
+
+    document.getElementById("speechStatus").textContent =
+        "Audio guide stopped.";
+}
+
+function showARMessage() {
+    document.getElementById("arMessage").textContent =
+        "AR integration will open here once the Unity application is connected.";
+}
+
+window.addEventListener("beforeunload", () => {
+    if ("speechSynthesis" in window) {
+        speechSynthesis.cancel();
+    }
+});
+
+</script>
+
+</body>
+</html>

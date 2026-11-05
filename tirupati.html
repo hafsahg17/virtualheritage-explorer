@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tirupati Temple | Virtual Heritage Explorer</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: #f8f3e9;
+    color: #30251d;
+}
+
+h1, h2, h3 {
+    font-family: 'Cinzel', serif;
+}
+
+nav {
+    min-height: 76px;
+    padding: 15px 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #24180f;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-family: 'Cinzel', serif;
+    font-size: 20px;
+    color: #e7c17b;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 25px;
+    font-size: 14px;
+}
+
+nav a:hover {
+    color: #e7c17b;
+}
+
+.hero {
+    min-height: 78vh;
+    background:
+        linear-gradient(90deg, rgba(20,12,7,.83), rgba(20,12,7,.2)),
+        url("https://upload.wikimedia.org/wikipedia/commons/4/4e/Tirumala_Anand_nilayam4653.jpg")
+        center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    padding: 8%;
+    color: white;
+}
+
+.hero-content {
+    max-width: 650px;
+}
+
+.tag {
+    color: #e7c17b;
+    letter-spacing: 4px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+h1 {
+    font-size: clamp(42px, 7vw, 76px);
+    line-height: 1.12;
+    margin: 20px 0;
+}
+
+.hero p {
+    font-size: 17px;
+    line-height: 1.8;
+    max-width: 570px;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 13px 25px;
+    background: #c59a51;
+    color: #24180f;
+    text-decoration: none;
+    border-radius: 3px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #e7c17b;
+}
+
+section {
+    padding: 75px 8%;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.section-title span {
+    color: #a77936;
+    letter-spacing: 3px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.section-title h2 {
+    font-size: 34px;
+    margin-top: 12px;
+}
+
+.intro,
+.history-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 45px;
+    align-items: center;
+}
+
+.intro img,
+.history img {
+    width: 100%;
+    height: 390px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.intro p,
+.history p,
+.architecture p {
+    line-height: 1.9;
+    color: #66594e;
+    margin-top: 15px;
+}
+
+.facts {
+    background: #2b1d13;
+    color: white;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    text-align: center;
+    padding: 40px 8%;
+}
+
+.fact strong {
+    display: block;
+    font-family: 'Cinzel', serif;
+    font-size: 25px;
+    color: #e7c17b;
+}
+
+.fact span {
+    font-size: 13px;
+    color: #e4d8c9;
+}
+
+.history {
+    background: #eee5d5;
+}
+
+.architecture {
+    max-width: 850px;
+    margin: auto;
+    text-align: center;
+}
+
+.gallery {
+    background: #f1e9dc;
+}
+
+.gallery-intro {
+    text-align: center;
+    max-width: 750px;
+    margin: -20px auto 35px;
+    color: #66594e;
+    line-height: 1.8;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.gallery-card {
+    background: #fffaf2;
+    border-radius: 7px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(45,30,15,.09);
+    transition: .3s;
+}
+
+.gallery-card:hover {
+    transform: translateY(-6px);
+}
+
+.gallery-card img {
+    display: block;
+    width: 100%;
+    height: 245px;
+    object-fit: cover;
+    background: #e3d8c7;
+}
+
+.gallery-card h3 {
+    font-size: 17px;
+    padding: 17px 17px 5px;
+    color: #392719;
+}
+
+.gallery-card p {
+    font-size: 13px;
+    line-height: 1.7;
+    padding: 0 17px 20px;
+    color: #746456;
+}
+
+.audio-box,
+.ar-box {
+    max-width: 850px;
+    margin: 25px auto 0;
+    background: white;
+    padding: 30px;
+    border-radius: 6px;
+    text-align: center;
+    box-shadow: 0 5px 25px #0000000d;
+}
+
+select {
+    padding: 11px;
+    border: 1px solid #c9b99f;
+    border-radius: 4px;
+    margin: 10px;
+}
+
+.audio-box button {
+    margin: 8px;
+}
+
+#audioStatus {
+    color: #66594e;
+    font-size: 13px;
+    margin-top: 15px;
+}
+
+.ar-box {
+    background: #2b1d13;
+    color: white;
+}
+
+.ar-box p {
+    color: #e4d8c9;
+    line-height: 1.7;
+    margin-top: 12px;
+}
+
+footer {
+    background: #24180f;
+    color: #d8c6ad;
+    text-align: center;
+    padding: 30px;
+    font-size: 13px;
+}
+
+@media(max-width:750px) {
+    nav {
+        padding: 15px 5%;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    nav a {
+        margin: 8px;
+        font-size: 12px;
+    }
+
+    .intro,
+    .history-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .facts {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    section {
+        padding: 55px 6%;
+    }
+}
+
+@media(max-width:480px) {
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-card img {
+        height: 230px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+    <div class="logo">Virtual Heritage Explorer</div>
+
+    <div>
+        <a href="index.html">Home</a>
+        <a href="#history">History</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#experience">Explore</a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+    <div class="hero-content">
+        <div class="tag">SPIRITUAL HERITAGE OF ANDHRA PRADESH</div>
+
+        <h1>Tirupati Temple</h1>
+
+        <p>
+            Explore the sacred Sri Venkateswara Temple at Tirumala,
+            one of India's most renowned pilgrimage destinations,
+            celebrated for its Dravidian architecture and rich traditions.
+        </p>
+
+        <a href="#history" class="btn">Explore the Temple</a>
+    </div>
+</header>
+
+<!-- INTRODUCTION -->
+<section>
+    <div class="intro">
+
+        <div>
+            <div class="tag">A SACRED LANDMARK</div>
+
+            <h2 style="font-size:32px;margin-top:15px">
+                Sri Venkateswara Temple
+            </h2>
+
+            <p>
+                Sri Venkateswara Temple is located in Tirumala,
+                near Tirupati in Andhra Pradesh. Dedicated to
+                Lord Venkateswara, a form of Lord Vishnu, it is
+                one of the most visited Hindu pilgrimage centres
+                in the world.
+            </p>
+
+            <p>
+                Situated among the beautiful Tirumala Hills,
+                the temple is admired for its traditional
+                Dravidian architecture, magnificent gopurams,
+                gold-plated vimana and centuries-old traditions.
+            </p>
+        </div>
+
+        <img
+            src="https://images.beyondyatra.com/dest/tirupati/places/tirumala-venkateswara-temple-andhra-pradesh-india_img_9.jpg"
+            alt="Sri Venkateswara Temple"
+        >
+
+    </div>
+</section>
+
+<!-- FACTS -->
+<div class="facts">
+
+    <div class="fact">
+        <strong>Tirumala</strong>
+        <span>Temple location</span>
+    </div>
+
+    <div class="fact">
+        <strong>Vishnu</strong>
+        <span>Presiding deity</span>
+    </div>
+
+    <div class="fact">
+        <strong>Dravidian</strong>
+        <span>Architectural style</span>
+    </div>
+
+    <div class="fact">
+        <strong>Andhra</strong>
+        <span>Pradesh, India</span>
+    </div>
+
+</div>
+
+<!-- HISTORY -->
+<section class="history" id="history">
+
+    <div class="section-title">
+        <span>THE STORY BEHIND THE TEMPLE</span>
+        <h2>History of Tirupati Temple</h2>
+    </div>
+
+    <div class="history-grid">
+
+        <img
+            src="https://commons.wikimedia.org/wiki/Special:FilePath/Tirumala%20gopurams.JPG"
+            alt="Tirumala temple gopurams"
+        >
+
+        <div>
+            <h3>A Heritage of Devotion</h3>
+
+            <p>
+                The Sri Venkateswara Temple has a long history
+                associated with Hindu traditions and devotion
+                to Lord Venkateswara. It has been an important
+                centre of pilgrimage for centuries.
+            </p>
+
+            <p>
+                Several South Indian dynasties, including the
+                Pallavas, Cholas and Vijayanagara rulers,
+                contributed to the temple's development and
+                supported its religious and cultural activities.
+            </p>
+
+            <p>
+                Today, the temple is administered by Tirumala
+                Tirupati Devasthanams (TTD), which manages
+                its religious activities and visitor services.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<!-- ARCHITECTURE -->
+<section>
+
+    <div class="section-title">
+        <span>DESIGN AND CRAFTSMANSHIP</span>
+        <h2>Temple Architecture</h2>
+    </div>
+
+    <div class="architecture">
+
+        <p>
+            The Sri Venkateswara Temple is a remarkable example
+            of Dravidian temple architecture. Its design includes
+            towering gopurams, beautifully carved pillars,
+            sacred halls and detailed stone sculptures.
+        </p>
+
+        <p>
+            The gold-plated Ananda Nilayam Vimana above the
+            main sanctum is one of the temple's most distinctive
+            architectural features. The temple complex also
+            includes sacred water bodies and traditional
+            ceremonial spaces.
+        </p>
+
+    </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+
+    <div class="section-title">
+        <span>VISUAL HERITAGE COLLECTION</span>
+        <h2>Explore Tirupati Temple</h2>
+    </div>
+
+    <p class="gallery-intro">
+        Discover the beautiful structures, sacred architecture
+        and traditional surroundings of Tirumala Temple.
+    </p>
+
+    <div class="gallery-grid">
+
+        <div class="gallery-card">
+            <img
+                src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Tirumala_Anand_nilayam4653.jpg"
+                alt="Golden Ananda Nilayam"
+                loading="lazy"
+            >
+            <h3>1. Golden Ananda Nilayam</h3>
+            <p>
+                The famous gold-plated tower above the main sanctum,
+                one of the temple's most recognisable features.
+            </p>
+        </div>
+
+        <div class="gallery-card">
+            <img
+                src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Tirumala_Venkateswara_temple_entrance_09062015.JPG"
+                alt="Tirumala temple entrance"
+                loading="lazy"
+            >
+            <h3>2. Main Temple Entrance</h3>
+            <p>
+                A view of the temple entrance and its traditional
+                architectural details.
+            </p>
+        </div>
+
+        <div class="gallery-card">
+            <img
+                src="https://www.tutorialathome.in/postimg/2026/01/venkateswara-temple-07.jpg"
+                alt="Tirumala stone pillared courtyard"
+                loading="lazy"
+            >
+            <h3>3. Stone-pillared Courtyard</h3>
+            <p>
+                Beautiful pillars, stone flooring and traditional
+                temple details.
+            </p>
+        </div>
+
+        <div class="gallery-card">
+            <img
+                src="https://4.bp.blogspot.com/-HIPEyOyYfpk/W5jvBKHepaI/AAAAAAAIp7c/sljh9pkkZ_Q82GtUxzgZqhusmk0XgzN-wCLcBGAs/s1600/Tirumalaraya%2Bmandapam.jpg"
+                alt="Tirumalaraya Mandapam"
+                loading="lazy"
+            >
+            <h3>4. Tirumalaraya Mandapam</h3>
+            <p>
+                A traditional stone mandapam with carved pillars
+                and detailed craftsmanship.
+            </p>
+        </div>
+
+        <div class="gallery-card">
+            <img
+                src="https://media.assettype.com/deccanherald%2F2024-08-21%2Fijqsk5bw%2Ffile7n04wx29ncz1exe9d5i1.jpg?ar=40%3A21&auto=format%2Ccompress&mode=crop&ogImage=true&rect=0%2C23%2C1200%2C630&w=1200"
+                alt="Golden temple chariot"
+                loading="lazy"
+            >
+            <h3>5. Golden Temple Chariot</h3>
+            <p>
+                A decorated ceremonial chariot associated with
+                temple celebrations and traditions.
+            </p>
+        </div>
+
+        <div class="gallery-card">
+            <img
+                src="https://feeds.abplive.com/onecms/images/uploaded-images/2022/09/16/db59f09e672fea41fa7bb6320424c1671663298946717233_original.jpg?impolicy=abp_cdn&imwidth=1200"
+                alt="Golden vimana detail"
+                loading="lazy"
+            >
+            <h3>6. Golden Vimana</h3>
+            <p>
+                A closer view of the gold-plated temple tower
+                above the main shrine.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<!-- AUDIO AND AR -->
+<section id="experience">
+
+    <div class="section-title">
+        <span>INTERACTIVE HERITAGE</span>
+        <h2>Explore the Experience</h2>
+    </div>
+
+    <div class="audio-box">
+
+        <h3>Listen to the Audio Guide</h3>
+
+        <p style="margin-top:10px;color:#66594e">
+            Listen to a short introduction to Tirupati Temple
+            in your preferred language.
+        </p>
+
+        <select id="language">
+            <option value="en-IN">English</option>
+            <option value="hi-IN">Hindi</option>
+            <option value="kn-IN">Kannada</option>
+            <option value="te-IN">Telugu</option>
+            <option value="ta-IN">Tamil</option>
+        </select>
+
+        <br>
+
+        <button class="btn" onclick="speakGuide()">
+            Play Audio Guide
+        </button>
+
+        <button class="btn" onclick="stopGuide()" style="background:#ddd">
+            Stop
+        </button>
+
+        <p id="audioStatus">
+            Select a language and press Play.
+        </p>
+
+    </div>
+
+    <div class="ar-box">
+
+        <h3>Discover Tirupati Temple in Augmented Reality</h3>
+
+        <p>
+            Explore the temple through an image-triggered
+            augmented reality experience. Scan the temple
+            image to view its 3D representation when the
+            Unity AR application is connected.
+        </p>
+
+        <button class="btn" onclick="showAR()">
+            Launch AR Experience
+        </button>
+
+        <p id="arMessage"></p>
+
+    </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+
+    <p>
+        Virtual Heritage Explorer |
+        Preserving India's Cultural Heritage Through Technology
+    </p>
+
+    <p style="margin-top:8px">
+        © 2026 Virtual Heritage Explorer
+    </p>
+
+</footer>
+
+<!-- JAVASCRIPT -->
+<script>
+
+const guides = {
+
+    'en-IN':
+    "Welcome to Sri Venkateswara Temple, located in Tirumala near Tirupati in Andhra Pradesh. The temple is dedicated to Lord Venkateswara, a form of Lord Vishnu. It is famous for its Dravidian architecture, beautiful gopurams, gold-plated vimana and rich traditions. The temple is one of India's most important pilgrimage destinations.",
+
+    'hi-IN':
+    "तिरुमला स्थित श्री वेंकटेश्वर मंदिर में आपका स्वागत है। यह मंदिर भगवान विष्णु के स्वरूप भगवान वेंकटेश्वर को समर्पित है। यह अपनी सुंदर द्रविड़ वास्तुकला, गोपुरम और धार्मिक परंपराओं के लिए प्रसिद्ध है।",
+
+    'kn-IN':
+    "ತಿರುಮಲದ ಶ್ರೀ ವೆಂಕಟೇಶ್ವರ ದೇವಸ್ಥಾನಕ್ಕೆ ಸ್ವಾಗತ. ಈ ದೇವಸ್ಥಾನವು ಆಂಧ್ರಪ್ರದೇಶದ ತಿರುಪತಿ ಸಮೀಪದಲ್ಲಿದೆ. ಇದು ಭಗವಾನ್ ವಿಷ್ಣುವಿನ ರೂಪವಾದ ಶ್ರೀ ವೆಂಕಟೇಶ್ವರನಿಗೆ ಸಮರ್ಪಿತವಾಗಿದೆ. ಈ ದೇವಸ್ಥಾನವು ತನ್ನ ದ್ರಾವಿಡ ವಾಸ್ತುಶಿಲ್ಪ ಮತ್ತು ಧಾರ್ಮಿಕ ಪರಂಪರೆಗಳಿಗೆ ಪ್ರಸಿದ್ಧವಾಗಿದೆ.",
+
+    'te-IN':
+    "తిరుమలలోని శ్రీ వేంకటేశ్వర స్వామి ఆలయానికి స్వాగతం. ఈ ఆలయం ఆంధ్రప్రదేశ్‌లోని తిరుపతి సమీపంలో ఉంది. ఇది విష్ణుమూర్తి అవతారమైన శ్రీ వేంకటేశ్వర స్వామికి అంకితం చేయబడింది. ఈ ఆలయం ద్రావిడ నిర్మాణ శైలి మరియు గొప్ప సంప్రదాయాలకు ప్రసిద్ధి చెందింది.",
+
+    'ta-IN':
+    "திருமலையில் உள்ள ஸ்ரீ வெங்கடேஸ்வரர் கோவிலுக்கு வரவேற்கிறோம். இந்த கோவில் ஆந்திரப் பிரதேசத்தில் திருப்பதிக்கு அருகில் அமைந்துள்ளது. இது விஷ்ணுவின் வடிவமான வெங்கடேஸ்வரருக்கு அர்ப்பணிக்கப்பட்டுள்ளது. திராவிட கட்டிடக்கலை மற்றும் பாரம்பரியத்திற்காக இந்த கோவில் புகழ்பெற்றது."
+
+};
+
+
+let currentUtterance = null;
+let requestNumber = 0;
+
+
+function speakGuide() {
+
+    if (!('speechSynthesis' in window)) {
+
+        document.getElementById('audioStatus').textContent =
+            'Audio guide is not supported in this browser.';
+
+        return;
+    }
+
+    const thisRequest = ++requestNumber;
+
+    window.speechSynthesis.cancel();
+
+    const language = document.getElementById('language').value;
+    const status = document.getElementById('audioStatus');
+
+    status.textContent = 'Loading audio guide...';
+
+
+    function speakWhenReady() {
+
+        if (thisRequest !== requestNumber) return;
+
+        const voices = window.speechSynthesis.getVoices();
+
+        const languageCode = language.split('-')[0].toLowerCase();
+
+        const matchingVoices = voices.filter(voice =>
+            voice.lang &&
+            voice.lang.toLowerCase().startsWith(languageCode)
+        );
+
+        const exactVoice = voices.find(voice =>
+            voice.lang &&
+            voice.lang.toLowerCase() === language.toLowerCase()
+        );
+
+        const selectedVoice = exactVoice || matchingVoices[0];
+
+        const speech = new SpeechSynthesisUtterance(guides[language]);
+
+        speech.lang = language;
+        speech.rate = 0.88;
+        speech.pitch = 1;
+        speech.volume = 1;
+
+        if (selectedVoice) {
+            speech.voice = selectedVoice;
+        }
+
+        speech.onstart = function() {
+
+            if (thisRequest === requestNumber) {
+                status.textContent = 'Audio guide is playing...';
+            }
+
+        };
+
+        speech.onend = function() {
+
+            if (thisRequest === requestNumber) {
+                status.textContent = 'Audio guide completed.';
+                currentUtterance = null;
+            }
+
+        };
+
+        speech.onerror = function() {
+
+            if (thisRequest === requestNumber) {
+                status.textContent =
+                    'Unable to play this language. Check available voices on your device.';
+
+                currentUtterance = null;
+            }
+
+        };
+
+        currentUtterance = speech;
+
+        window.speechSynthesis.speak(speech);
+
+    }
+
+
+    if (window.speechSynthesis.getVoices().length > 0) {
+
+        speakWhenReady();
+
+    } else {
+
+        window.speechSynthesis.onvoiceschanged = function() {
+
+            if (thisRequest === requestNumber) {
+                speakWhenReady();
+            }
+
+        };
+
+        setTimeout(function() {
+
+            if (thisRequest === requestNumber && !currentUtterance) {
+                speakWhenReady();
+            }
+
+        }, 1500);
+
+    }
+
+}
+
+
+function stopGuide() {
+
+    requestNumber++;
+
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+    }
+
+    currentUtterance = null;
+
+    document.getElementById('audioStatus').textContent =
+        'Audio guide stopped.';
+
+}
+
+
+function showAR() {
+
+    document.getElementById('arMessage').textContent =
+        "AR scanner is currently a demonstration placeholder. The Unity image-triggered AR application must be connected to activate the 3D temple experience.";
+
+}
+
+
+window.addEventListener('beforeunload', function() {
+
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+    }
+
+});
+
+</script>
+
+</body>
+</html>

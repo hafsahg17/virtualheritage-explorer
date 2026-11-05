@@ -1,0 +1,832 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mysore Palace | Virtual Heritage Explorer</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: #f8f3e9;
+    color: #30251d;
+}
+
+nav {
+    min-height: 76px;
+    padding: 15px 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #24180f;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-family: 'Cinzel', serif;
+    font-size: 20px;
+    color: #e7c17b;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 25px;
+    font-size: 14px;
+}
+
+nav a:hover {
+    color: #e7c17b;
+}
+
+.hero {
+    min-height: 78vh;
+    background:
+        linear-gradient(90deg, rgba(20,12,7,.82), rgba(20,12,7,.25)),
+        url("https://upload.wikimedia.org/wikipedia/commons/4/45/A_side_view_of_the_magnificent_Amba_Vilas_Palace_%28Mysuru_Palace%29%2C_against_blue_coloured_sky%2C_Mysuru%2C_Karnataka.jpg")
+        center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    padding: 8%;
+    color: white;
+}
+
+.hero-content {
+    max-width: 650px;
+}
+
+.tag {
+    color: #e7c17b;
+    letter-spacing: 4px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+h1, h2, h3 {
+    font-family: 'Cinzel', serif;
+}
+
+h1 {
+    font-size: clamp(42px, 7vw, 76px);
+    line-height: 1.12;
+    margin: 20px 0;
+}
+
+.hero p {
+    font-size: 17px;
+    line-height: 1.8;
+    max-width: 570px;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 13px 25px;
+    background: #c59a51;
+    color: #24180f;
+    text-decoration: none;
+    border-radius: 3px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #e7c17b;
+}
+
+section {
+    padding: 75px 8%;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.section-title span {
+    color: #a77936;
+    letter-spacing: 3px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.section-title h2 {
+    font-size: 34px;
+    margin-top: 12px;
+}
+
+.intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 45px;
+    align-items: center;
+}
+
+.intro img {
+    width: 100%;
+    height: 390px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.intro p,
+.history p,
+.architecture p {
+    line-height: 1.9;
+    color: #66594e;
+    margin-top: 15px;
+}
+
+.facts {
+    background: #2b1d13;
+    color: white;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    text-align: center;
+    padding: 40px 8%;
+}
+
+.fact strong {
+    display: block;
+    font-family: 'Cinzel', serif;
+    font-size: 27px;
+    color: #e7c17b;
+}
+
+.fact span {
+    font-size: 13px;
+    color: #e4d8c9;
+}
+
+.history {
+    background: #eee5d5;
+}
+
+.history-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.history img {
+    width: 100%;
+    height: 360px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.architecture {
+    max-width: 850px;
+    margin: auto;
+    text-align: center;
+}
+
+.gallery {
+    background: #f1e9dc;
+}
+
+.gallery-intro {
+    text-align: center;
+    max-width: 750px;
+    margin: -20px auto 35px;
+    color: #66594e;
+    line-height: 1.8;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.gallery-card {
+    background: #fffaf2;
+    border-radius: 7px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(45, 30, 15, .09);
+    transition: .3s;
+}
+
+.gallery-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px rgba(45, 30, 15, .15);
+}
+
+.gallery-card img {
+    display: block;
+    width: 100%;
+    height: 245px;
+    object-fit: cover;
+    background: #e3d8c7;
+}
+
+.gallery-card h3 {
+    font-size: 17px;
+    padding: 17px 17px 5px;
+    color: #392719;
+}
+
+.gallery-card p {
+    font-size: 13px;
+    line-height: 1.7;
+    padding: 0 17px 20px;
+    color: #746456;
+}
+
+.audio-box,
+.ar-box {
+    max-width: 850px;
+    margin: 25px auto 0;
+    background: white;
+    padding: 30px;
+    border-radius: 6px;
+    text-align: center;
+    box-shadow: 0 5px 25px #0000000d;
+}
+
+select {
+    padding: 11px;
+    border: 1px solid #c9b99f;
+    border-radius: 4px;
+    margin: 10px;
+}
+
+.ar-box {
+    background: #2b1d13;
+    color: white;
+}
+
+.ar-box p {
+    color: #e4d8c9;
+    line-height: 1.7;
+    margin-top: 12px;
+}
+
+#speechStatus {
+    margin-top: 18px;
+    font-size: 13px;
+    color: #a77936;
+    line-height: 1.7;
+}
+
+footer {
+    background: #24180f;
+    color: #d8c6ad;
+    text-align: center;
+    padding: 30px;
+    font-size: 13px;
+}
+
+@media(max-width: 750px) {
+    nav {
+        padding: 15px 5%;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    nav a {
+        margin: 8px;
+        font-size: 12px;
+    }
+
+    .intro,
+    .history-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .facts {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    section {
+        padding: 55px 6%;
+    }
+}
+
+@media(max-width: 480px) {
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-card img {
+        height: 230px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+    <div class="logo">Virtual Heritage Explorer</div>
+
+    <div>
+        <a href="index.html">Home</a>
+        <a href="#history">History</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#experience">Explore</a>
+    </div>
+</nav>
+
+<!-- HERO SECTION -->
+<header class="hero">
+    <div class="hero-content">
+        <div class="tag">ROYAL HERITAGE OF KARNATAKA</div>
+
+        <h1>Mysore Palace</h1>
+
+        <p>
+            Discover the grandeur of the royal residence of the Wadiyar dynasty,
+            known for its magnificent architecture, intricate artwork and
+            spectacular illumination.
+        </p>
+
+        <a href="#history" class="btn">Explore the Palace</a>
+    </div>
+</header>
+
+<!-- INTRODUCTION -->
+<section>
+    <div class="intro">
+
+        <div>
+            <div class="tag">A ROYAL LANDMARK</div>
+
+            <h2 style="font-size:32px; margin-top:15px">
+                The Pride of Mysuru
+            </h2>
+
+            <p>
+                Mysore Palace, also known as Amba Vilas Palace, is one of
+                India's most celebrated royal landmarks. Located in the
+                heart of Mysuru, Karnataka, it served as the residence
+                of the Wadiyar royal family.
+            </p>
+
+            <p>
+                The palace is admired for its Indo-Saracenic architecture,
+                grand halls, decorated ceilings, stained-glass windows
+                and beautiful courtyards.
+            </p>
+        </div>
+
+        <img
+            src="https://upload.wikimedia.org/wikipedia/commons/4/45/A_side_view_of_the_magnificent_Amba_Vilas_Palace_%28Mysuru_Palace%29%2C_against_blue_coloured_sky%2C_Mysuru%2C_Karnataka.jpg"
+            alt="Mysore Palace exterior"
+        >
+
+    </div>
+</section>
+
+<!-- FACTS -->
+<div class="facts">
+
+    <div class="fact">
+        <strong>1897</strong>
+        <span>Construction began</span>
+    </div>
+
+    <div class="fact">
+        <strong>1912</strong>
+        <span>Present palace completed</span>
+    </div>
+
+    <div class="fact">
+        <strong>Wadiyar</strong>
+        <span>Royal dynasty</span>
+    </div>
+
+    <div class="fact">
+        <strong>Mysuru</strong>
+        <span>Karnataka, India</span>
+    </div>
+
+</div>
+
+<!-- HISTORY -->
+<section class="history" id="history">
+
+    <div class="section-title">
+        <span>THE STORY BEHIND THE PALACE</span>
+        <h2>History of Mysore Palace</h2>
+    </div>
+
+    <div class="history-grid">
+
+        <img
+            src="https://upload.wikimedia.org/wikipedia/commons/5/5a/Illuminated_Mysore_palace_at_night.JPG"
+            alt="Mysore Palace illuminated at night"
+        >
+
+        <div>
+            <h3>A Legacy of the Wadiyars</h3>
+
+            <p>
+                The Mysore royal family, the Wadiyars, ruled the Kingdom
+                of Mysore for several centuries. The palace has been
+                rebuilt and renovated over time following fires and
+                changing royal requirements.
+            </p>
+
+            <p>
+                The present structure was commissioned after the old
+                wooden palace was destroyed by fire in 1897. British
+                architect Henry Irwin designed the current palace,
+                which was completed in 1912.
+            </p>
+
+            <p>
+                Today, Mysore Palace remains an important symbol of
+                Karnataka's royal history and cultural heritage.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<!-- ARCHITECTURE -->
+<section>
+
+    <div class="section-title">
+        <span>DESIGN AND CRAFTSMANSHIP</span>
+        <h2>Architectural Beauty</h2>
+    </div>
+
+    <div class="architecture">
+
+        <p>
+            Mysore Palace is an outstanding example of Indo-Saracenic
+            architecture, combining Hindu, Islamic, Rajput and Gothic
+            influences. Its impressive domes, arches, towers and
+            detailed interiors make it architecturally unique.
+        </p>
+
+        <p>
+            The palace features beautifully decorated halls, including
+            the Durbar Hall and the Kalyana Mantapa. The colourful
+            stained-glass ceiling, carved doors, ornamental pillars
+            and detailed artwork reflect the craftsmanship of the period.
+        </p>
+
+    </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+
+    <div class="section-title">
+        <span>EXPLORE THE PALACE INTERIORS</span>
+        <h2>Inside Mysore Palace</h2>
+    </div>
+
+    <p class="gallery-intro">
+        Explore the magnificent halls, decorative ceilings, royal corridors
+        and artistic details that make Mysore Palace a remarkable heritage
+        landmark.
+    </p>
+
+    <div class="gallery-grid">
+
+        <div class="gallery-card">
+            <img
+                src="https://commons.wikimedia.org/wiki/Special:FilePath/DURBAR%20HALL%20INSIDE%20MYSORE%20PALACE.jpg"
+                alt="Durbar Hall inside Mysore Palace"
+                loading="lazy"
+            >
+            <h3>1. Durbar Hall</h3>
+            <p>
+                The grand royal court where the Maharaja held official
+                gatherings and ceremonies. It is known for its ornate
+                decorations and impressive pillars.
+            </p>
+        </div>
+
+        <div class="gallery-card">
+            <img
+                src="https://commons.wikimedia.org/wiki/Special:FilePath/Kalyana%20mantapa%20-%20Mysore%20palace.jpg"
+                alt="Kalyana Mantapa marriage pavilion"
+                loading="lazy"
+            >
+            <h3>2. Kalyana Mantapa</h3>
+            <p>
+                The beautiful royal marriage pavilion, recognised for
+                its octagonal design, colourful glasswork and
+                decorative flooring.
+            </p>
+        </div>
+
+        <div class="gallery-card">
+            <img
+                src="https://commons.wikimedia.org/wiki/Special:FilePath/Chandelier%20Hall%20Mysore%20Palace%20Dec23%20A7C%2008289.jpg"
+                alt="Chandelier Hall of Mysore Palace"
+                loading="lazy"
+            >
+            <h3>3. Chandelier Hall</h3>
+            <p>
+                A magnificent palace interior featuring decorative
+                chandeliers and detailed architectural craftsmanship.
+            </p>
+        </div>
+
+        <div class="gallery-card">
+            <img
+                src="https://commons.wikimedia.org/wiki/Special:FilePath/Beautifully%20lit%20corridor%20of%20Amba%20Vilas%20Palace.jpg"
+                alt="Beautifully lit royal corridor"
+                loading="lazy"
+            >
+            <h3>4. Royal Corridors</h3>
+            <p>
+                Elegant passageways with decorative arches and
+                beautiful lighting that reveal the palace's
+                architectural details.
+            </p>
+        </div>
+
+        <div class="gallery-card">
+            <img
+                src="https://commons.wikimedia.org/wiki/Special:FilePath/Carvings%20Door%20Frame%20Mysore%20Palace%20Dec23%20A7C%2008265.jpg"
+                alt="Carved decorative door frame"
+                loading="lazy"
+            >
+            <h3>5. Carved Palace Door</h3>
+            <p>
+                Intricate carvings and ornamental details showcase
+                the traditional craftsmanship found throughout
+                the royal residence.
+            </p>
+        </div>
+
+        <div class="gallery-card">
+            <img
+                src="https://commons.wikimedia.org/wiki/Special:FilePath/Stained%20Glass%20Window%20Mysore%20Palace%20Dec23%20A7C%2008291.jpg"
+                alt="Stained glass artwork in Mysore Palace"
+                loading="lazy"
+            >
+            <h3>6. Stained-glass Artwork</h3>
+            <p>
+                Colourful glasswork adds artistic beauty to the
+                palace interiors and reflects the decorative
+                traditions of the royal era.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<!-- AUDIO AND AR EXPERIENCE -->
+<section id="experience">
+
+    <div class="section-title">
+        <span>INTERACTIVE HERITAGE</span>
+        <h2>Explore the Experience</h2>
+    </div>
+
+    <!-- AUDIO GUIDE -->
+    <div class="audio-box">
+
+        <h3>Listen to the Audio Guide</h3>
+
+        <p style="margin-top:10px; color:#66594e">
+            Listen to a short introduction to Mysore Palace
+            in your preferred language.
+        </p>
+
+        <select id="language">
+            <option value="en-IN">English</option>
+            <option value="hi-IN">Hindi</option>
+            <option value="kn-IN">Kannada</option>
+            <option value="te-IN">Telugu</option>
+            <option value="ta-IN">Tamil</option>
+        </select>
+
+        <br>
+
+        <button class="btn" onclick="speakGuide()">
+            ▶ Play Audio Guide
+        </button>
+
+        <button class="btn" onclick="stopGuide()" style="background:#ddd">
+            ■ Stop
+        </button>
+
+        <p id="speechStatus">
+            Select a language and press Play.
+        </p>
+
+    </div>
+
+    <!-- AR EXPERIENCE -->
+    <div class="ar-box">
+
+        <h3>Discover Mysore Palace in Augmented Reality</h3>
+
+        <p>
+            Experience digital heritage exploration through an
+            image-triggered AR model. Scan the palace image to view
+            its 3D representation when the Unity AR application
+            is connected.
+        </p>
+
+        <button class="btn" onclick="showAR()">
+            Launch AR Experience
+        </button>
+
+        <p id="arMessage"></p>
+
+    </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+
+    <p>
+        Virtual Heritage Explorer |
+        Preserving India's Cultural Heritage Through Technology
+    </p>
+
+    <p style="margin-top:8px">
+        © 2026 Virtual Heritage Explorer
+    </p>
+
+</footer>
+
+<!-- JAVASCRIPT -->
+<script>
+
+// FIVE-LANGUAGE MYSORE PALACE AUDIO GUIDE
+// Same voice-selection logic as Charminar and Hampi.
+
+const guides = {
+
+    "en-IN": `Welcome to Mysore Palace, also known as Amba Vilas Palace. Located in Mysuru, Karnataka, this magnificent palace was designed by Henry Irwin and completed in 1912. It is famous for its Indo Saracenic architecture, royal halls, beautiful domes and spectacular illumination. The palace represents the rich history and cultural heritage of the Wadiyar dynasty.`,
+
+    "hi-IN": `मैसूर पैलेस में आपका स्वागत है। इसे अंबा विलास पैलेस भी कहा जाता है। यह कर्नाटक के मैसूर शहर में स्थित है। इस महल को ब्रिटिश वास्तुकार हेनरी इरविन ने डिजाइन किया था और यह 1912 में पूरा हुआ था। यह अपनी सुंदर वास्तुकला, शाही हॉल और शानदार रोशनी के लिए प्रसिद्ध है। यह महल वाडियार राजवंश के समृद्ध इतिहास और सांस्कृतिक विरासत का प्रतीक है।`,
+
+    "kn-IN": `ಮೈಸೂರು ಅರಮನೆಗೆ ಸ್ವಾಗತ. ಇದನ್ನು ಅಂಬಾ ವಿಲಾಸ ಅರಮನೆ ಎಂದೂ ಕರೆಯುತ್ತಾರೆ. ಇದು ಕರ್ನಾಟಕದ ಮೈಸೂರಿನಲ್ಲಿ ಇದೆ. ಈ ಭವ್ಯ ಅರಮನೆಯನ್ನು ಬ್ರಿಟಿಷ್ ವಾಸ್ತುಶಿಲ್ಪಿ ಹೆನ್ರಿ ಇರ್ವಿನ್ ವಿನ್ಯಾಸಗೊಳಿಸಿದರು ಮತ್ತು 1912ರಲ್ಲಿ ಪೂರ್ಣಗೊಳಿಸಲಾಯಿತು. ಈ ಅರಮನೆಯು ಇಂಡೋ ಸಾರಸೆನಿಕ್ ವಾಸ್ತುಶಿಲ್ಪ, ಸುಂದರವಾದ ಗುಮ್ಮಟಗಳು, ರಾಜಮನೆತನದ ಸಭಾಂಗಣಗಳು ಮತ್ತು ಅದ್ಭುತ ಬೆಳಕಿನ ಅಲಂಕಾರಕ್ಕೆ ಪ್ರಸಿದ್ಧವಾಗಿದೆ. ಇದು ವಾಡಿಯಾರ್ ರಾಜವಂಶದ ಶ್ರೀಮಂತ ಇತಿಹಾಸ ಮತ್ತು ಸಂಸ್ಕೃತಿಯ ಸಂಕೇತವಾಗಿದೆ.`,
+
+    "te-IN": `మైసూర్ ప్యాలెస్‌కు స్వాగతం. దీనిని అంబా విలాస్ ప్యాలెస్ అని కూడా పిలుస్తారు. ఇది కర్ణాటకలోని మైసూరులో ఉంది. ఈ అద్భుతమైన రాజభవనాన్ని బ్రిటిష్ వాస్తుశిల్పి హెన్రీ ఇర్విన్ రూపొందించారు మరియు 1912లో పూర్తి చేశారు. ఈ రాజభవనం ఇండో సారాసెనిక్ నిర్మాణ శైలి, అందమైన గోపురాలు, రాజసభలు మరియు అద్భుతమైన విద్యుత్ అలంకరణకు ప్రసిద్ధి చెందింది. ఇది వడియార్ రాజవంశం యొక్క గొప్ప చరిత్ర మరియు సాంస్కృతిక వారసత్వానికి చిహ్నంగా నిలుస్తుంది.`,
+
+    "ta-IN": `மைசூர் அரண்மனைக்கு வரவேற்கிறோம். இது அம்பா விலாஸ் அரண்மனை என்றும் அழைக்கப்படுகிறது. இது கர்நாடகாவின் மைசூரில் அமைந்துள்ளது. இந்த அற்புதமான அரண்மனையை பிரிட்டிஷ் கட்டிடக் கலைஞர் ஹென்றி இர்வின் வடிவமைத்தார். இது 1912 ஆம் ஆண்டு நிறைவடைந்தது. இந்த அரண்மனை இந்தோ சாரசெனிக் கட்டிடக்கலை, அழகான குவிமாடங்கள், அரசவைக் கூடங்கள் மற்றும் கண்கவர் மின்விளக்கு அலங்காரத்திற்காகப் புகழ்பெற்றது. இது வாடியார் வம்சத்தின் வளமான வரலாறு மற்றும் கலாச்சார பாரம்பரியத்தின் அடையாளமாக விளங்குகிறது.`
+
+};
+
+let currentUtterance = null;
+let requestNumber = 0;
+
+function speakGuide() {
+
+    if (!("speechSynthesis" in window)) {
+        document.getElementById("speechStatus").textContent =
+            "Your browser does not support speech playback. Please use updated Chrome.";
+        return;
+    }
+
+    const language = document.getElementById("language").value;
+    const narration = guides[language];
+
+    if (!narration) {
+        document.getElementById("speechStatus").textContent =
+            "Narration is unavailable.";
+        return;
+    }
+
+    const thisRequest = ++requestNumber;
+
+    speechSynthesis.cancel();
+
+    document.getElementById("speechStatus").textContent =
+        "Loading " + language + " voice...";
+
+    const startSpeaking = () => {
+
+        if (thisRequest !== requestNumber) return;
+
+        const voices = speechSynthesis.getVoices();
+
+        const languageCode = language.split("-")[0].toLowerCase();
+
+        const matchingVoices = voices.filter(voice =>
+            voice.lang.toLowerCase().startsWith(languageCode)
+        );
+
+        if (matchingVoices.length === 0) {
+            document.getElementById("speechStatus").textContent =
+                "The " + languageCode.toUpperCase() +
+                " voice is not installed on this device. Install its speech voice in your device settings and restart Chrome.";
+            return;
+        }
+
+        const selectedVoice =
+            matchingVoices.find(voice =>
+                voice.lang.toLowerCase() === language.toLowerCase()
+            ) || matchingVoices[0];
+
+        currentUtterance = new SpeechSynthesisUtterance(narration);
+
+        currentUtterance.voice = selectedVoice;
+        currentUtterance.lang = selectedVoice.lang;
+        currentUtterance.rate = 0.88;
+        currentUtterance.pitch = 1;
+        currentUtterance.volume = 1;
+
+        currentUtterance.onstart = () => {
+            if (thisRequest !== requestNumber) return;
+
+            document.getElementById("speechStatus").textContent =
+                "Playing " + languageCode.toUpperCase() + " narration...";
+        };
+
+        currentUtterance.onend = () => {
+            if (thisRequest !== requestNumber) return;
+
+            document.getElementById("speechStatus").textContent =
+                "Audio guide completed.";
+        };
+
+        currentUtterance.onerror = (event) => {
+            if (thisRequest !== requestNumber) return;
+
+            if (event.error !== "canceled" &&
+                event.error !== "interrupted") {
+
+                document.getElementById("speechStatus").textContent =
+                    "Audio playback error: " + event.error;
+            }
+        };
+
+        speechSynthesis.speak(currentUtterance);
+    };
+
+    const voices = speechSynthesis.getVoices();
+
+    if (voices.length > 0) {
+        startSpeaking();
+    } else {
+
+        speechSynthesis.onvoiceschanged = startSpeaking;
+
+        setTimeout(() => {
+            if (thisRequest === requestNumber &&
+                !speechSynthesis.speaking) {
+                startSpeaking();
+            }
+        }, 1500);
+    }
+}
+
+function stopGuide() {
+
+    requestNumber++;
+
+    speechSynthesis.cancel();
+
+    currentUtterance = null;
+
+    document.getElementById("speechStatus").textContent =
+        "Audio guide stopped.";
+}
+
+function showAR() {
+
+    document.getElementById('arMessage').textContent =
+    "AR scanner is currently a demonstration placeholder. The Unity image-triggered AR application must be connected to activate the 3D palace experience.";
+
+}
+
+window.addEventListener("beforeunload", () => {
+
+    if ("speechSynthesis" in window) {
+        speechSynthesis.cancel();
+    }
+
+});
+
+</script>
+
+</body>
+</html>
